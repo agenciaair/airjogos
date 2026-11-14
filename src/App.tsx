@@ -5,6 +5,9 @@ import QuemEuSou from './pages/QuemEuSou';
 import Mimica from './pages/Mimica';
 import Completar from './pages/Completar';
 import Taboo from './pages/Taboo';
+import BatataQuente from './pages/BatataQuente';
+import Adedonha from './pages/Adedonha';
+import Desenho from './pages/Desenho';
 
 export default function App() {
   return (
@@ -15,6 +18,9 @@ export default function App() {
       <Route path="/mimica" element={<Mimica />} />
       <Route path="/completar" element={<Completar />} />
       <Route path="/taboo" element={<Taboo />} />
+      <Route path="/batata-quente" element={<BatataQuente />} />
+      <Route path="/adedonha" element={<Adedonha />} />
+      <Route path="/desenho" element={<Desenho />} />
     </Routes>
   );
 }

@@ -3,7 +3,7 @@
  * e no botão "Regras" dentro de cada jogo (explicação completa).
  */
 
-export type GameKey = 'impostor' | 'quemeusou' | 'mimica' | 'completar' | 'taboo';
+export type GameKey = 'impostor' | 'quemeusou' | 'mimica' | 'completar' | 'taboo' | 'batata' | 'adedonha' | 'desenho';
 
 export interface GameRules {
   title: string;
@@ -169,5 +169,89 @@ export const RULES: Record<GameKey, GameRules> = {
       { name: 'Tema personalizado', text: 'Uma carta por linha, assim: Palavra | proibida1, proibida2, proibida3, proibida4, proibida5' },
     ],
     tips: ['Use sinônimos e exemplos do dia a dia.', 'Se a carta estiver difícil, pule logo para não perder tempo.'],
+  },
+
+  batata: {
+    title: 'Batata Quente',
+    tagline: 'Fale algo do tema e passe o celular rápido, antes que a batata exploda na sua mão!',
+    players: '2 a 20 jogadores',
+    duration: '5 a 15 min',
+    goal: 'Não ser a pessoa que está com o celular quando a batata explodir. Quem sobreviver por último vence.',
+    steps: [
+      'Sentem em roda e digitem os nomes na ordem em que estão sentados.',
+      'O app sorteia um tema (ex.: "Frutas") e diz quem começa.',
+      'Toque em "Acender o pavio". A partir daí, o celular começa a bipar.',
+      'Quem está com o celular fala uma coisa do tema (ex.: "Banana!") e passa o celular para a pessoa ao lado.',
+      'Não pode repetir o que alguém já falou. Travou? Continua com a batata na mão até lembrar de algo.',
+      'Os bipes vão ficando cada vez mais rápidos. Em algum momento secreto, a batata explode: BOOM!',
+      'Toque no nome de quem estava com o celular: essa pessoa perde uma vida. Uma nova rodada começa com outro tema.',
+    ],
+    win: ['Quem perde todas as vidas sai do jogo. A última pessoa que sobrar vence.'],
+    forbidden: ['Repetir uma resposta que já foi dita na rodada.', 'Passar o celular sem falar nada.', 'Segurar o celular de propósito ou jogar ele (passe na mão!).'],
+    options: [
+      { name: 'Vidas', text: 'Quantas explosões cada pessoa aguenta antes de sair do jogo.' },
+      { name: 'Tempo do pavio', text: 'Curta, Média ou Longa: muda quanto tempo, no máximo, a batata demora para explodir. O momento exato é sempre surpresa.' },
+      { name: 'Categoria', text: 'Fácil é ótimo para crianças. Desafio tem letras, rimas e situações.' },
+      { name: 'Tema personalizado', text: 'Escreva os seus próprios temas (ex.: "Nomes da família", "Músicas da igreja").' },
+    ],
+    tips: ['Respostas curtas são mais rápidas!', 'Se o tema estiver difícil, use "Sortear outro tema" antes de acender o pavio.'],
+  },
+
+  adedonha: {
+    title: 'Adedonha (Stop)',
+    tagline: 'O app sorteia uma letra e todo mundo preenche nome, cidade, animal… Quem gritar STOP primeiro?',
+    players: '2 a 12 jogadores',
+    duration: '10 a 25 min',
+    goal: 'Preencher no papel uma palavra para cada coluna, todas começando com a letra sorteada, e fazer mais pontos que os outros.',
+    steps: [
+      'Cada jogador pega papel e caneta e desenha uma tabela com as colunas escolhidas (ex.: Nome, CEP, Animal, Fruta, Cor, Objeto).',
+      'O app sorteia uma letra. Ex.: letra M.',
+      'Toque em "Valendo!" e todo mundo escreve uma palavra com M em cada coluna. Ex.: Maria, Manaus, Macaco, Melancia, Marrom, Mesa.',
+      'Quem terminar todas as colunas primeiro grita STOP! e toca no botão vermelho. Todos param de escrever na hora.',
+      'Se tiver tempo marcado e ele acabar, a rodada também termina.',
+      'Leiam as respostas, coluna por coluna, e cada um soma os seus pontos da rodada (veja abaixo). Coloquem os pontos no app.',
+      'O app sorteia uma nova letra (sem repetir) e começa a próxima rodada.',
+    ],
+    win: [
+      'Pontos por resposta: 10 se só você escreveu aquela palavra, 5 se outra pessoa escreveu a mesma, 0 se ficou em branco ou o grupo não aceitou.',
+      'Depois da última rodada, vence quem tiver mais pontos somados.',
+    ],
+    forbidden: ['Continuar escrevendo depois do STOP.', 'Inventar palavras: se o grupo não aceitar, vale 0.'],
+    options: [
+      { name: 'Rodadas', text: 'Quantas letras serão sorteadas na partida.' },
+      { name: 'Tempo por rodada', text: 'Tempo máximo para escrever. "Livre" deixa sem cronômetro: só acaba no STOP!' },
+      { name: 'Tirar letras difíceis', text: 'Evita letras como K, W, X, Y, Q, Z e H.' },
+      { name: 'Colunas do papel', text: 'Escolha quais categorias vão no papel (mínimo 3).' },
+    ],
+    tips: ['Comece pelas colunas mais fáceis e deixe as difíceis por último.', 'Respostas diferentes valem mais: fuja do óbvio!'],
+  },
+
+  desenho: {
+    title: 'Desenha e Adivinha',
+    tagline: 'Desenhe a palavra secreta na tela do celular para o seu time adivinhar, sem falar nada.',
+    players: '4+ jogadores (2 times)',
+    duration: '10 a 20 min',
+    goal: 'Fazer o seu time adivinhar a palavra secreta só olhando o seu desenho, antes do tempo acabar.',
+    steps: [
+      'Divida o grupo em Time A e Time B (ou escolha "Todos Juntos").',
+      'Na vez do seu time, escolham o desenhista. Só ele segura o dedo na tela para ver a palavra.',
+      'Toque em "Começar a desenhar": o cronômetro dispara e aparece um quadro branco.',
+      'Desenhe com o dedo. Dá para trocar a cor, usar a borracha, desfazer o último traço ou limpar tudo.',
+      'Esqueceu a palavra? Segure o botão "Segure para ver a palavra" no topo.',
+      'O time fala os palpites em voz alta. Acertaram → toque "Acertaram! +1".',
+      'Se o tempo acabar ou vocês desistirem, ninguém pontua. A vez passa para o outro time, com uma palavra nova.',
+    ],
+    win: [
+      'Modo Times: vence o primeiro time que chegar no limite de pontos.',
+      'Todos Juntos: o grupo tenta chegar no limite de acertos.',
+    ],
+    forbidden: ['Escrever letras ou números no desenho.', 'Falar, fazer gestos ou sons.', 'Desenhar setas apontando para objetos da sala.'],
+    options: [
+      { name: 'Modo Times / Todos Juntos', text: 'Times disputam pontos. Todos Juntos é cooperativo: todo mundo adivinha.' },
+      { name: 'Tempo para desenhar', text: 'Quanto tempo o desenhista tem em cada rodada.' },
+      { name: 'Limite de pontos', text: 'Quantos acertos são necessários para terminar o jogo.' },
+      { name: 'Tema personalizado', text: 'Use as suas próprias palavras (separadas por vírgula ou uma por linha).' },
+    ],
+    tips: ['Comece pelo formato geral e depois coloque os detalhes.', 'Para ações (ex.: "Nadar"), desenhe um bonequinho fazendo a ação.'],
   },
 };

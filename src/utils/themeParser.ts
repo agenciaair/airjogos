@@ -40,7 +40,7 @@ const CUSTOM_THEMES_KEY = 'air-jogos:custom-themes';
 
 export interface CustomTheme {
   id: string;
-  game: 'impostor' | 'quemeusou' | 'mimica' | 'completar' | 'taboo';
+  game: 'impostor' | 'quemeusou' | 'mimica' | 'completar' | 'taboo' | 'batata' | 'desenho';
   name: string;
   createdAt: number;
   items: string[] | TabooCardInput[];

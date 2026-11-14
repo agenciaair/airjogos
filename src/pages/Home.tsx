@@ -8,11 +8,14 @@ interface GameDef {
   title: string;
   description: string;
   players: string;
-  image: string;
+  /** foto do card; sem foto, o card usa um degradê com emoji */
+  image?: string;
+  emoji?: string;
+  gradient?: string;
 }
 
-function game(path: string, key: GameKey, title: string, image: string): GameDef {
-  return { path, title, description: RULES[key].tagline, players: RULES[key].players, image };
+function game(path: string, key: GameKey, title: string, image?: string, emoji?: string, gradient?: string): GameDef {
+  return { path, title, description: RULES[key].tagline, players: RULES[key].players, image, emoji, gradient };
 }
 
 const GAMES: GameDef[] = [
@@ -21,6 +24,9 @@ const GAMES: GameDef[] = [
   game('/mimica', 'mimica', 'Mímica', '/images/mimica.png'),
   game('/completar', 'completar', 'Completar', '/images/completar.png'),
   game('/taboo', 'taboo', 'Tabu', '/images/taboo.png'),
+  game('/batata-quente', 'batata', 'Batata Quente', undefined, '🥔', 'from-orange-500 via-red-600 to-slate-900'),
+  game('/adedonha', 'adedonha', 'Adedonha', undefined, '🔤', 'from-sky-500 via-indigo-700 to-slate-900'),
+  game('/desenho', 'desenho', 'Desenha e Adivinha', undefined, '🎨', 'from-fuchsia-500 via-purple-700 to-slate-900'),
 ];
 
 /** Repetições da lista para simular um loop infinito no carrossel. */
@@ -120,13 +126,23 @@ export default function Home() {
                 onDragStart={(e) => e.preventDefault()}
                 className="group relative h-80 w-[220px] shrink-0 overflow-hidden rounded-3xl shadow-lg shadow-black/40 ring-2 ring-slate-700 ring-offset-4 ring-offset-slate-950 transition-all duration-300 hover:ring-[#A3E635] sm:h-96 sm:w-[260px]"
               >
-                {/* Camada 1: imagem de fundo */}
-                <img
-                  src={game.image}
-                  alt={game.title}
-                  draggable={false}
-                  className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-110"
-                />
+                {/* Camada 1: imagem de fundo (ou degradê com emoji para jogos sem foto) */}
+                {game.image ? (
+                  <img
+                    src={game.image}
+                    alt={game.title}
+                    draggable={false}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 ease-out group-hover:scale-110"
+                  />
+                ) : (
+                  <div
+                    className={`absolute inset-0 flex items-start justify-center bg-gradient-to-br pt-5 transition-transform duration-300 ease-out group-hover:scale-110 ${game.gradient ?? 'from-slate-700 to-slate-900'}`}
+                  >
+                    <span className="select-none text-[76px] leading-none drop-shadow-lg sm:text-[96px]" aria-hidden>
+                      {game.emoji}
+                    </span>
+                  </div>
+                )}
 
                 {/* Camada 2: degradê base escuro (legibilidade) */}
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent" />
