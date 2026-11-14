@@ -131,7 +131,8 @@ export default function Mimica() {
   const timerColor = timer.secondsLeft <= 10 ? 'text-red-500' : secondsRatio > 0.5 ? 'text-lime-400' : 'text-amber-400';
 
   return (
-    <GameShell title="MÍMICA" matchInProgress={matchInProgress} accent="text-lime-400">
+    <GameShell title="MÍMICA" matchInProgress={matchInProgress}
+      game="mimica" accent="text-lime-400">
       {phase === 'setup' && (
         <Panel className="flex flex-col items-center gap-5">
           <div className="flex w-full gap-2">
@@ -148,6 +149,9 @@ export default function Mimica() {
               Individual / Livre
             </button>
           </div>
+          <p className="-mt-3 w-full text-xs text-slate-400">
+            {modo === 'times' ? 'Time A contra Time B, revezando a vez. Quem chegar primeiro no limite de pontos vence.' : 'Todo mundo joga junto, sem disputa entre times.'}
+          </p>
 
           <div className="flex flex-col gap-2 w-full">
             <span className="font-display text-sm font-semibold text-slate-300">Tempo por rodada</span>
@@ -237,7 +241,7 @@ export default function Mimica() {
           ) : (
             <h2 className="font-display text-2xl font-extrabold">Próximo Ator</h2>
           )}
-          <p className="text-sm text-slate-400">Escolha quem vai atuar e prepare-se!</p>
+          <p className="text-sm text-slate-400">Escolham quem vai atuar. Só o ator olha a tela: segure para ver a primeira palavra e toque em Começar.</p>
 
           <HoldToReveal
             label="Segure para ver a palavra secreta"
@@ -252,6 +256,7 @@ export default function Mimica() {
 
       {phase === 'acting' && (
         <Panel className="flex flex-col items-center gap-6 text-center">
+          <p className="text-xs font-semibold uppercase tracking-wide text-red-400">Sem falar nem fazer sons · esconda a tela do seu time</p>
           <p className="font-display text-3xl font-extrabold break-words">{currentWord}</p>
           <div className={`font-display text-6xl font-extrabold tabular-nums ${timerColor}`}>{timer.label}</div>
           <p className="text-sm text-slate-400">

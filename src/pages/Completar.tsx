@@ -126,7 +126,8 @@ export default function Completar() {
   }
 
   return (
-    <GameShell title="COMPLETAR" matchInProgress={matchInProgress} accent="text-lime-400">
+    <GameShell title="COMPLETAR" matchInProgress={matchInProgress}
+      game="completar" accent="text-lime-400">
       {phase === 'setup' && (
         <Panel className="flex flex-col items-center gap-5">
           <NumberStepper label="Jogadores" value={qtdJogadores} min={3} max={20} onChange={setQtdJogadores} />
@@ -227,7 +228,7 @@ export default function Completar() {
           <p className="text-xs uppercase tracking-wide text-slate-400">Categoria: {categoriaLabel}</p>
 
           <div className="w-full rounded-xl border border-slate-700 bg-slate-800/40 p-3">
-            <p className="mb-2 text-xs font-semibold text-slate-400">Ordem da roda:</p>
+            <p className="mb-2 text-xs font-semibold text-slate-400">Ordem da roda (cada um fala UMA palavra, continuando a frase):</p>
             <p className="font-display text-sm font-bold text-lime-400">{narradores.join(' → ')}</p>
           </div>
 
@@ -239,7 +240,7 @@ export default function Completar() {
           )}
 
           <div className="flex flex-col items-center gap-2">
-            <p className="text-sm text-slate-400">Palavras ditas na roda</p>
+            <p className="text-sm text-slate-400">Toque a cada palavra dita na roda</p>
             <button
               onClick={() => setWordsSaid((w) => Math.min(limitePalavras, w + 1))}
               className="flex min-h-[80px] min-w-[80px] items-center justify-center rounded-full border-2 border-lime-400 font-display text-3xl font-extrabold text-lime-400 active:scale-95"
@@ -248,6 +249,7 @@ export default function Completar() {
             </button>
           </div>
 
+          <p className="text-xs text-slate-500">{players[guesserIndex]} pode chutar a qualquer momento.</p>
           <div className="grid w-full grid-cols-2 gap-3">
             <Button variant="primary" onClick={() => handleResult('acertou')}>
               Acertou!

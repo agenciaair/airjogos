@@ -1,44 +1,26 @@
 import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type UIEvent as ReactUIEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { Users } from 'lucide-react';
+import { RULES, type GameKey } from '../data/rules';
 
 interface GameDef {
   path: string;
   title: string;
   description: string;
+  players: string;
   image: string;
 }
 
+function game(path: string, key: GameKey, title: string, image: string): GameDef {
+  return { path, title, description: RULES[key].tagline, players: RULES[key].players, image };
+}
+
 const GAMES: GameDef[] = [
-  {
-    path: '/impostor',
-    title: 'Impostor',
-    description: 'Descubra quem não sabe a palavra secreta antes que ele descubra o grupo.',
-    image: '/images/impostor.jpg',
-  },
-  {
-    path: '/quem-eu-sou',
-    title: 'Quem Eu Sou?',
-    description: 'Todo mundo sabe sua identidade secreta, menos você. Pergunte e descubra!',
-    image: '/images/quemeusou.jpg',
-  },
-  {
-    path: '/mimica',
-    title: 'Mímica',
-    description: 'Atue sem falar nada e faça seu time adivinhar o máximo de palavras possível.',
-    image: '/images/mimica.png',
-  },
-  {
-    path: '/completar',
-    title: 'Completar',
-    description: 'A roda de narradores dá pistas, uma palavra de cada vez, para o adivinhador acertar.',
-    image: '/images/completar.png',
-  },
-  {
-    path: '/taboo',
-    title: 'Tabu',
-    description: 'Faça o time adivinhar a palavra principal sem usar nenhuma das 5 palavras proibidas.',
-    image: '/images/taboo.png',
-  },
+  game('/impostor', 'impostor', 'Impostor', '/images/impostor.jpg'),
+  game('/quem-eu-sou', 'quemeusou', 'Quem Eu Sou?', '/images/quemeusou.jpg'),
+  game('/mimica', 'mimica', 'Mímica', '/images/mimica.png'),
+  game('/completar', 'completar', 'Completar', '/images/completar.png'),
+  game('/taboo', 'taboo', 'Tabu', '/images/taboo.png'),
 ];
 
 /** Repetições da lista para simular um loop infinito no carrossel. */
@@ -110,7 +92,7 @@ export default function Home() {
       <div className="mx-auto flex max-w-2xl flex-col items-center gap-2 px-4 text-center">
         <img src="/images/logo-airdesign.png" alt="Air Jogos" className="h-14 w-auto sm:h-20" />
         <p className="max-w-md text-sm text-slate-400">
-          Escolha um jogo, reúna a galera e comece a diversão — tudo em um único celular.
+          Escolha um jogo, reúna a galera e jogue com um celular só. Cada jogo tem um botão <b className="text-lime-400">Regras</b> no topo.
         </p>
       </div>
 
@@ -154,8 +136,11 @@ export default function Home() {
 
                 {/* Camada 4: conteúdo */}
                 <div className="relative z-10 flex h-full flex-col justify-end p-5">
+                  <span className="mb-2 flex w-fit items-center gap-1 rounded-full bg-black/50 px-2.5 py-1 text-[11px] font-bold text-slate-100">
+                    <Users size={12} /> {game.players}
+                  </span>
                   <h2 className="font-display text-2xl font-bold text-white">{game.title}</h2>
-                  <p className="mt-1 text-sm text-slate-200/90">{game.description}</p>
+                  <p className="mt-1 text-sm leading-snug text-slate-100">{game.description}</p>
                   <span className="mt-4 inline-block rounded-xl bg-[#A3E635] px-4 py-2.5 text-center font-display text-sm font-bold text-slate-950">
                     Jogar
                   </span>

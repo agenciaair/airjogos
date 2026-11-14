@@ -149,6 +149,7 @@ export default function Impostor() {
     <GameShell
       title={<img src="/images/logo-espiao.png" alt="Espião" className="h-6 w-auto" />}
       matchInProgress={matchInProgress}
+      game="impostor"
       accent="text-lime-400"
     >
       {phase === 'setup' && (
@@ -160,12 +161,12 @@ export default function Impostor() {
 
           <label className="flex w-full items-center gap-3 rounded-xl border border-slate-700 bg-slate-800/50 px-4 py-3">
             <input type="checkbox" checked={usarNomes} onChange={(e) => setUsarNomes(e.target.checked)} className="h-5 w-5 accent-lime-400" />
-            <span className="text-sm font-semibold">Usar nomes dos jogadores</span>
+            <span className="text-sm font-semibold">Usar nomes dos jogadores<span className="mt-0.5 block text-xs font-normal text-slate-400">O app chama cada um pelo nome na hora de passar o celular.</span></span>
           </label>
 
           <label className="flex w-full items-center gap-3 rounded-xl border border-slate-700 bg-slate-800/50 px-4 py-3">
             <input type="checkbox" checked={modoCasual} onChange={(e) => setModoCasual(e.target.checked)} className="h-5 w-5 accent-lime-400" />
-            <span className="text-sm font-semibold">Modo Casual (dica para o espião)</span>
+            <span className="text-sm font-semibold">Modo Casual<span className="mt-0.5 block text-xs font-normal text-slate-400">O espião recebe uma pista sobre a palavra. Bom para iniciantes.</span></span>
           </label>
 
           <ThemeSourcePicker
@@ -230,11 +231,13 @@ export default function Impostor() {
                   <p className="text-xs uppercase tracking-wide text-slate-400">Categoria: {categoriaLabel}</p>
                   <p className="font-display text-2xl font-extrabold text-red-400">Você é o Espião!</p>
                   {modoCasual && <p className="mt-2 text-sm text-slate-300">Dica: {item.hint}</p>}
+                  <p className="mt-2 max-w-xs text-sm text-slate-300">Disfarce! Preste atenção nas perguntas para descobrir a palavra.</p>
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-2">
                   <p className="text-xs uppercase tracking-wide text-slate-400">Categoria: {categoriaLabel}</p>
                   <p className="font-display text-2xl font-extrabold text-lime-400">{item.secret}</p>
+                  <p className="mt-2 max-w-xs text-sm text-slate-300">Essa é a palavra secreta. Não fale ela! Descubra quem não sabe.</p>
                 </div>
               )
             }
@@ -250,6 +253,9 @@ export default function Impostor() {
           <p className="text-xs uppercase tracking-wide text-slate-400">Categoria: {categoriaLabel}</p>
           <p className="font-display text-lg font-bold">
             <span className="text-lime-400">{askerName}</span> pergunta para <span className="text-lime-400">{askeeName}</span>
+          </p>
+          <p className="-mt-2 max-w-sm text-sm text-slate-400">
+            Faça uma pergunta sobre a palavra secreta, sem dizer a palavra. Quem responde também não pode entregá-la.
           </p>
           <Button variant="ghost" onClick={() => setAskIndex((i) => (i + 1) % askOrder.length)}>
             Próxima Pergunta
@@ -271,6 +277,7 @@ export default function Impostor() {
             )}
           </div>
 
+          <p className="text-xs text-slate-500">Desconfiaram de alguém ou o tempo acabou? Hora de votar.</p>
           <Button variant="accent" fullWidth onClick={() => setPhase('vote')}>
             Ir para Votação
           </Button>
@@ -280,7 +287,7 @@ export default function Impostor() {
       {phase === 'vote' && (
         <Panel className="flex flex-col items-center gap-4">
           <h2 className="font-display text-xl font-extrabold">Quem é o Espião?</h2>
-          <p className="text-sm text-slate-400">O grupo decide em conjunto quem acusar.</p>
+          <p className="text-center text-sm text-slate-400">Conversem e escolham juntos UMA pessoa para acusar. Se for inocente, os espiões vencem.</p>
           <div className="flex w-full flex-col gap-2">
             {players.map((p) => (
               <button

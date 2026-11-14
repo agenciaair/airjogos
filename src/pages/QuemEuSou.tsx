@@ -178,7 +178,8 @@ export default function QuemEuSou() {
   }, [players]);
 
   return (
-    <GameShell title="QUEM EU SOU?" matchInProgress={matchInProgress} accent="text-lime-400">
+    <GameShell title="QUEM EU SOU?" matchInProgress={matchInProgress}
+      game="quemeusou" accent="text-lime-400">
       {phase === 'setup' && (
         <Panel className="flex flex-col items-center gap-5">
           <NumberStepper label="Jogadores" value={qtdJogadores} min={2} max={20} onChange={setQtdJogadores} />
@@ -218,10 +219,15 @@ export default function QuemEuSou() {
               Na Testa
             </button>
           </div>
+          <p className="-mt-3 w-full text-xs text-slate-400">
+            {displayMode === 'passar'
+              ? 'Os amigos veem a identidade no celular enquanto a pessoa da vez fica de costas.'
+              : 'A pessoa da vez apoia o celular na testa, com a tela virada para os amigos.'}
+          </p>
 
           <label className="flex w-full items-center gap-3 rounded-xl border border-slate-700 bg-slate-800/50 px-4 py-3">
             <input type="checkbox" checked={modoDica} onChange={(e) => setModoDica(e.target.checked)} className="h-5 w-5 accent-lime-400" />
-            <span className="text-sm font-semibold">Modo Dica</span>
+            <span className="text-sm font-semibold">Modo Dica<span className="mt-0.5 block text-xs font-normal text-slate-400">Libera 1 dica por turno para quem está adivinhando.</span></span>
           </label>
 
           <ThemeSourcePicker
@@ -313,6 +319,9 @@ export default function QuemEuSou() {
             </div>
           )}
           <p className="text-sm text-slate-400">Turno de {current.name}</p>
+          <p className="-mt-3 max-w-sm text-sm text-slate-300">
+            {current.name} faz perguntas de <b>SIM</b> ou <b>NÃO</b>. A cada resposta do grupo, toque no botão correspondente.
+          </p>
 
           <div className="flex gap-6 font-display text-lg font-bold">
             <span className="text-lime-400">Sim: {simCount}</span>

@@ -144,7 +144,8 @@ export default function Taboo() {
   }
 
   return (
-    <GameShell title="TABOO" matchInProgress={matchInProgress} accent="text-lime-400">
+    <GameShell title="TABOO" matchInProgress={matchInProgress}
+      game="taboo" accent="text-lime-400">
       {phase === 'setup' && (
         <Panel className="flex flex-col items-center gap-5">
           <div className="flex w-full gap-2">
@@ -161,6 +162,9 @@ export default function Taboo() {
               Roda Livre
             </button>
           </div>
+          <p className="-mt-3 w-full text-xs text-slate-400">
+            {modo === 'equipes' ? 'Time A contra Time B, revezando a vez. Vence quem tiver mais pontos no final.' : 'Todo mundo joga junto, sem times.'}
+          </p>
 
           <div className="flex flex-col gap-2 w-full">
             <span className="font-display text-sm font-semibold text-slate-300">Tempo por rodada</span>
@@ -194,7 +198,7 @@ export default function Taboo() {
 
           <label className="flex w-full items-center gap-3 rounded-xl border border-slate-700 bg-slate-800/50 px-4 py-3">
             <input type="checkbox" checked={penalidades} onChange={(e) => setPenalidades(e.target.checked)} className="h-5 w-5 accent-lime-400" />
-            <span className="text-sm font-semibold">Penalidade de -1 ponto por infração de Tabu</span>
+            <span className="text-sm font-semibold">Penalidade de -1 ponto por Tabu<span className="mt-0.5 block text-xs font-normal text-slate-400">Se o Orador falar uma palavra proibida, o time perde 1 ponto.</span></span>
           </label>
 
           <ThemeSourcePicker
@@ -244,7 +248,10 @@ export default function Taboo() {
           ) : (
             <h2 className="font-display text-2xl font-extrabold">Próximo Orador</h2>
           )}
-          <p className="text-sm text-slate-400">Escolha o orador e o fiscal para esta rodada.</p>
+          <div className="w-full rounded-xl border border-slate-700 bg-slate-800/40 p-3 text-left text-sm text-slate-300">
+            <p><b className="text-lime-400">Orador:</b> explica a palavra para o próprio time.</p>
+            <p className="mt-1"><b className="text-red-400">Fiscal:</b> alguém do outro time. Olha a tela junto e aperta "Tabu" se ouvir uma palavra proibida.</p>
+          </div>
           <Button fullWidth onClick={handleBegin}>
             Começar
           </Button>
@@ -282,7 +289,7 @@ export default function Taboo() {
             </ul>
           </div>
 
-          <p className="text-xs text-slate-500">Pulos restantes: {pulosRestantes}</p>
+          <p className="text-xs text-slate-400">Explique a palavra verde sem dizer ela nem nenhuma vermelha. · Pulos restantes: {pulosRestantes}</p>
 
           <div className="grid w-full grid-cols-3 gap-2">
             <Button variant="primary" onClick={handleAcertou}>
