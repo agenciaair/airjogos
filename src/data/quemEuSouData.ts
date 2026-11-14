@@ -1,3 +1,5 @@
+import { temasExceto } from './temasExtras';
+
 export interface QuemEuSouItem {
   name: string;
   hint: string;
@@ -426,4 +428,6 @@ export const QUEMEUSOU_CATEGORIES: QuemEuSouCategory[] = [
   { key: 'personagens-ficcao', label: 'Personagens de Desenho & Ficção', items: personagensFiccao },
   { key: 'animais', label: 'Animais do Mundo', items: animais },
   { key: 'objetos-coisas', label: 'Objetos & Coisas', items: objetosCoisas },
+  // categorias temáticas compartilhadas (animais já existe acima)
+  ...temasExceto('animais-extra').map((c) => ({ key: c.key, label: c.label, items: c.temas.map((t) => ({ name: t.nome, hint: t.dica })) })),
 ];

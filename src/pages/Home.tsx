@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type U
 import { Link } from 'react-router-dom';
 import { Users } from 'lucide-react';
 import { RULES, type GameKey } from '../data/rules';
+import { InstalarApp } from '../components/AppOffline';
 
 interface GameDef {
   path: string;
@@ -19,11 +20,11 @@ function game(path: string, key: GameKey, title: string, image?: string, emoji?:
 }
 
 const GAMES: GameDef[] = [
-  game('/impostor', 'impostor', 'Impostor', '/images/impostor.jpg'),
-  game('/quem-eu-sou', 'quemeusou', 'Quem Eu Sou?', '/images/quemeusou.jpg'),
-  game('/mimica', 'mimica', 'Mímica', '/images/mimica.png'),
-  game('/completar', 'completar', 'Completar', '/images/completar.png'),
-  game('/taboo', 'taboo', 'Tabu', '/images/taboo.png'),
+  game('/impostor', 'impostor', 'Impostor', '/images/cards/impostor.webp'),
+  game('/quem-eu-sou', 'quemeusou', 'Quem Eu Sou?', '/images/cards/quemeusou.webp'),
+  game('/mimica', 'mimica', 'Mímica', '/images/cards/mimica.webp'),
+  game('/completar', 'completar', 'Completar', '/images/cards/completar.webp'),
+  game('/taboo', 'taboo', 'Tabu', '/images/cards/taboo.webp'),
   game('/batata-quente', 'batata', 'Batata Quente', undefined, '🥔', 'from-orange-500 via-red-600 to-slate-900'),
   game('/adedonha', 'adedonha', 'Adedonha', undefined, '🔤', 'from-sky-500 via-indigo-700 to-slate-900'),
   game('/desenho', 'desenho', 'Desenha e Adivinha', undefined, '🎨', 'from-fuchsia-500 via-purple-700 to-slate-900'),
@@ -100,6 +101,7 @@ export default function Home() {
         <p className="max-w-md text-sm text-slate-400">
           Escolha um jogo, reúna a galera e jogue com um celular só. Cada jogo tem um botão <b className="text-lime-400">Regras</b> no topo.
         </p>
+        <InstalarApp />
       </div>
 
       <div className="relative mx-auto mt-10 max-w-xs sm:max-w-md">

@@ -1,3 +1,5 @@
+import { TEMAS_EXTRAS } from './temasExtras';
+
 export interface CompletarCategory {
   key: string;
   label: string;
@@ -61,4 +63,6 @@ export const COMPLETAR_CATEGORIES: CompletarCategory[] = [
   { key: 'coisas-inusitadas', label: 'Coisas Inusitadas', items: coisasInusitadas },
   { key: 'fatos-cotidianos', label: 'Fatos Cotidianos', items: fatosCotidianos },
   { key: 'celebridades', label: 'Celebridades', items: celebridades },
+  // categorias temáticas compartilhadas
+  ...TEMAS_EXTRAS.map((c) => ({ key: c.key, label: c.label, items: c.temas.map((t) => t.nome) })),
 ];

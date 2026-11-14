@@ -1,3 +1,5 @@
+import { TEMAS_EXTRAS } from './temasExtras';
+
 export interface TabooCard {
   palavra: string;
   proibidas: [string, string, string, string, string];
@@ -426,4 +428,6 @@ export const TABOO_CATEGORIES: TabooCategory[] = [
   { key: 'comidas-gastronomia', label: 'Comidas & Gastronomia', items: comidasGastronomia },
   { key: 'geografia-viagem', label: 'Geografia & Viagem', items: geografiaViagem },
   { key: 'tecnologia-marcas', label: 'Tecnologia & Marcas', items: tecnologiaMarcas },
+  // categorias temáticas compartilhadas
+  ...TEMAS_EXTRAS.map((c) => ({ key: c.key, label: c.label, items: c.temas.map((t) => ({ palavra: t.nome, proibidas: t.proibidas })) })),
 ];

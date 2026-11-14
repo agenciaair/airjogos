@@ -1,3 +1,5 @@
+import { TEMAS_EXTRAS } from './temasExtras';
+
 export interface ImpostorItem {
   secret: string;
   hint: string;
@@ -633,4 +635,6 @@ export const IMPOSTOR_CATEGORIES: ImpostorCategory[] = [
   { key: 'meios-de-transporte', label: 'Meios de Transporte', items: meiosDeTransporte },
   { key: 'objetos-da-casa', label: 'Objetos da Casa', items: objetosDaCasa },
   { key: 'marcas-famosas', label: 'Marcas Famosas', items: marcasFamosas },
+  // categorias temáticas compartilhadas (Bíblia, futebol, Minecraft…)
+  ...TEMAS_EXTRAS.map((c) => ({ key: c.key, label: c.label, items: c.temas.map((t) => ({ secret: t.nome, hint: t.dica })) })),
 ];

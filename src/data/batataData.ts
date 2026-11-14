@@ -1,3 +1,5 @@
+import { BATATA_EXTRAS } from './temasAcao';
+
 export interface BatataCategory {
   key: string;
   label: string;
@@ -43,4 +45,5 @@ export const BATATA_CATEGORIES: BatataCategory[] = [
   { key: 'facil', label: 'Fácil (crianças e família)', items: facil },
   { key: 'medio', label: 'Médio', items: medio },
   { key: 'desafio', label: 'Desafio (letras, rimas e situações)', items: desafio },
+  ...BATATA_EXTRAS,
 ];

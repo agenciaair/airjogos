@@ -1,3 +1,5 @@
+import { DESENHO_EXTRAS } from './temasAcao';
+
 export interface DesenhoCategory {
   key: string;
   label: string;
@@ -50,4 +52,5 @@ export const DESENHO_CATEGORIES: DesenhoCategory[] = [
   { key: 'lugares', label: 'Lugares', items: lugares },
   { key: 'acoes', label: 'Ações', items: acoes },
   { key: 'desafio', label: 'Desafio (coisas abstratas)', items: desafio },
+  ...DESENHO_EXTRAS,
 ];

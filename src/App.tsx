@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import { AvisoOffline } from './components/AppOffline';
 import Home from './pages/Home';
 import Impostor from './pages/Impostor';
 import QuemEuSou from './pages/QuemEuSou';
@@ -11,6 +12,8 @@ import Desenho from './pages/Desenho';
 
 export default function App() {
   return (
+    <>
+    <AvisoOffline />
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/impostor" element={<Impostor />} />
@@ -22,5 +25,6 @@ export default function App() {
       <Route path="/adedonha" element={<Adedonha />} />
       <Route path="/desenho" element={<Desenho />} />
     </Routes>
+    </>
   );
 }

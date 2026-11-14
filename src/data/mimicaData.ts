@@ -1,3 +1,5 @@
+import { MIMICA_EXTRAS } from './temasAcao';
+
 export interface MimicaCategory {
   key: string;
   label: string;
@@ -421,4 +423,5 @@ export const MIMICA_CATEGORIES: MimicaCategory[] = [
   { key: 'filmes-series', label: 'Filmes & Séries', items: filmesSeries },
   { key: 'objetos-cotidianos', label: 'Objetos Cotidianos', items: objetosCotidianos },
   { key: 'profissoes-oficios', label: 'Profissões & Ofícios', items: profissoesOficios },
+  ...MIMICA_EXTRAS,
 ];
